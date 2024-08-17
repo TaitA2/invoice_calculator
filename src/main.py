@@ -1,12 +1,12 @@
 import pyautogui as pag
+from PyPDF2 import PdfReader
+
 # months dict
 months = {"01":'January', "02":'February', "03":'March', "04":'April', "05":'May', "0":'June', "07":'July', "08":'August', "09":'September', "10":'October', "11":'November', "12":'December'}
 
-def main():
+def calculate():
     # fees dict
     fees = {}
-    pag.displayMousePosition()
-
     # date
     date = input("Enter date of gig (DD/MM/YY)... ")
     day, month, year = date.split("/")
@@ -52,33 +52,30 @@ def main():
 
     # google doc title
     title = f"Invoice {invoice_number}"
-    # coords dict
-    coords = [[title, (2625, 400)], [invoice_number, (3712, 615)], [date, (3690, 640)], [location, (3347, 1032)], [travel_tier, (3222, 1080)], [carpooling, (3183, 1130)], [travel_tier_fee, (3780, 1080)], [fuel_total, (3780, 1130)], [tolls, (3780, 1180)], [grand_total, (3780, 1260)]]
-
+    
+    # print breakdown of calculations
     print(f"BASE FEE: â‚¬{base_fee}")
     print(f"TRAVEL TIER {travel_tier}: â‚¬{travel_tier_fee:.2f}")
     print(f"FUEL: â‚¬{fuel_total}")
     print(f"TOTAL: â‚¬{grand_total}")
 
-    # fill out google doc using automation with pyautogui
-
-    for coord in coords:
-        # click on location to edit
-        pag.click(coord[1])
-        # delete existing info
-        pag.hotkey("shift", "end")
-        # add 'â‚¬' to any money values
-        if isinstance(coord[0], float):
-            pag.hotkey("altright", "4")
-            pag.typewrite(f"{coord[0]:.2f}")
-            continue
-        # type the info
-        pag.typewrite(str(coord[0]))
-
-    # save as pdf
-    pag.hotkey("ctrl", "p")
+# function to create a new invoice from a template
+def create_invoice():
+    # create pdf reader object
+    reader = PdfReader("template.pdf")
+    template = reader.pages[0]
+    text = template.extract_text()
+    # print the text in the template as confirmation
+    print(text) 
 
 
+# main function
+def main():
+    # calculate expenses
+    calculate()
+
+    # create new invoice
+    create_invoice()
 # run program
 if __name__ == "__main__":
     main()
