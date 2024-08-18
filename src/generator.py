@@ -1,25 +1,46 @@
 import docx
 from email.message import EmailMessage
 import smtplib
+import re
 
 # function to create a new invoice from a docx template
 def generate_invoice(var_dict):
-    print("opening template... ")
+    print("\n\n---TEMPLATE---\n")
     template = docx.Document("template.docx")
-    print("Replacing placeholders... ")
-    invoice = find_and_replace(template.pages[0], var_dict)
-    print(f"Saving Invoice {var_dict["invoice_number"]}... ")
-    invoice.save(f"invoices/Invoice {var_dict['invoice_number']}")
+    # print all text in the template
+    for table in template.tables:
+        for cell in table._cells:
+            print(cell.text)
+    # replace placeholders
+    print("\n\n---REPLACEMENTS---\n\n")
+    invoice = template
+    # replace all variables in tables
+    for table in invoice.tables:
+        for cell in table._cells:
+            cell.text = find_and_replace(cell.text, var_dict)
+    # replace vars in paragraphs
+    for paragraph in invoice.paragraphs:
+        paragraph.text = find_and_replace(paragraph.text, var_dict)
+    print("---FINISHED INVOICE---\n\n")
+    # print all text in new invoice
+    for table in invoice.tables:
+        for cell in table._cells:
+            print(cell.text)
+    print(f"Saving Invoice {var_dict['invoice_number']}... ")
+    invoice.save(f"invoices/Invoice {var_dict['invoice_number']}.docx")
     print("Done!")
     
 
 def find_and_replace(text, var_dict):
-    for word in text:
-        if word.startswith("placeholder"):
-            print(word "is replaced with "end="")
-            var = word.replace("placeholder_", "")
-            word = var_dict[var]
-            print(word)
+    # print("TEXT: ", text)
+    matches = re.findall(r"placeholder_\w+", text)
+    # print(matches)    
+    vars = [match.replace("placeholder_", "") for match in matches]
+    # print(vars)
+    if matches:
+        for i in range(len(matches)):
+            print(f"{matches[i]} -> {var_dict[vars[i]]}")
+            text = text.replace(matches[i], var_dict[vars[i]])
     return text
 
 def send_email(var_dict):

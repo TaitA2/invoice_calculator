@@ -1,19 +1,19 @@
 # main calculation function
 def calculate():
     # months dict
-    months = {"01":'January', "02":'February', "03":'March', "04":'April', "05":'May', "0":'June', "07":'July', "08":'August', "09":'September', "10":'October', "11":'November', "12":'December'}
+    months = {"01":'January', "02":'February', "03":'March', "04":'April', "05":'May', "06":'June', "07":'July', "08":'August', "09":'September', "10":'October', "11":'November', "12":'December'}
     # fees dict
     fees = {}
     # date
     date = input("Enter date of gig (DD/MM/YY)... ")
     day, month, year = date.split("/")
-    date = f" {day} {months[month]} 20{year}"
+    formatted_date = f" {day} {months[month]} 20{year}"
 
     # invoice prefix
     invoice_number = f"{year}{month}{(input('Enter invoice suffix... '))}"
 
     # location
-    location = f"{input('Enter location of gig... ')} - {day}/{month}/{year}"
+    location = f"{input('Enter location of gig... ')}"
     # default fee value
     base_fee = 200
     # travel_tier 0-3
@@ -49,15 +49,19 @@ def calculate():
 
     # google doc title
     title = f"Invoice {invoice_number}"
-    
-    # print breakdown of calculations
-    print(f"BASE FEE: â‚¬{base_fee}")
-    print(f"TRAVEL TIER {travel_tier}: â‚¬{travel_tier_fee:.2f}")
-    print(f"FUEL: â‚¬{fuel_total}")
-    print(f"TOTAL: â‚¬{grand_total}")
+
+        # print breakdown of calculations
+    print(f"\n\nBASE FEE: €{base_fee}")
+    print(f"TRAVEL TIER {travel_tier}: €{travel_tier_fee:.2f}")
+    print(f"FUEL: €{fuel_total}")
+    print(f"TOLLS: €{tolls}")
+    print(f"TOTAL: €{grand_total}")
 
     # return var dict
-    var_dict = {"base_fee": base_fee, "travel_tier": travel_tier, "travel_tier_fee": travel_tier_fee, "invoice_number": invoice_number, "date": date, "formatted_date": f"{day} {months[month]} 20{year}", "location": location, "fuel_total": fuel_total, "carpooling": carpooling, "tolls": tolls, "grand_total": grand_total}
+    var_dict = {"base_fee": f"€{base_fee:.2f}", "travel_tier": travel_tier, "travel_tier_fee": f"€{travel_tier_fee:.2f}", "invoice_number": invoice_number, "date": date, 
+                "formatted_date": formatted_date, "location": location, "fuel_total": f"€{fuel_total:.2f}", "carpooling": carpooling, "tolls": f"€{tolls:.2f}", "grand_total": f"€{grand_total}"}
+    
+    return var_dict
 
 def main():
     calculate()
