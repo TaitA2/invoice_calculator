@@ -12,7 +12,7 @@ def main():
     var_dict["sender_email"] = "my@gmail.com"
     var_dict["recipient"] = "Mr. Recipient"
     var_dict["recipient_email"] = "recipient@example.com"
-    var_dict["IBAN"] = "IBAN NUMBER"
+    var_dict["iban"] = "IBAN NUMBER"
 
     # create new invoice
     generate_invoice(var_dict)
