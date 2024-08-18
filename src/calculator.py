@@ -56,5 +56,11 @@ def calculate():
     print(f"FUEL: â‚¬{fuel_total}")
     print(f"TOTAL: â‚¬{grand_total}")
 
-if __name__ == "__main__":
+    # return var dict
+    var_dict = {"base_fee": base_fee, "travel_tier": travel_tier, "travel_tier_fee": travel_tier_fee, "invoice_number": invoice_number, "date": date, "formatted_date": f"{day} {months[month]} 20{year}", "location": location, "fuel_total": fuel_total, "carpooling": carpooling, "tolls": tolls, "grand_total": grand_total}
+
+def main():
     calculate()
+
+if __name__ == "__main__":
+    main()
