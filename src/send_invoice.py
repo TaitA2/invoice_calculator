@@ -8,8 +8,8 @@ def send_email(var_dict):
     subject = f"Invoice for {var_dict['location']}"
     print(f"Setting subject to: {subject}")
     msg["Subject"] = subject
-    msg["From"] = var_dict["sender_email"]
-    msg["To"] = var_dict["recipient_email"]
+    msg["From"] = var_dict["from_email"]
+    msg["To"] = var_dict["to_email"]
     msg.set_content(f"Hi,\n\nPlease find invoice attached.\n\nAll the best,\n{var_dict['sender']}")
     attachment_path = f"invoices/Invoice {var_dict['invoice_number']}.docx"
     print("Adding attachment...")
@@ -21,12 +21,11 @@ def send_email(var_dict):
     # send
     print("Sending email ... ")
     # create connection
-    s = smtplib.SMTP_SSL('smtp.gmail.com', 465)
-    # login to email
-    s.login(var_dict["sender_email"], var_dict["app_password"])
-    # send email
-    s.send_message(msg)
-    s.quit()
+    with smtplib.SMTP_SSL('smtp.gmail.com', 465) as s:
+        # login to email
+        s.login(var_dict["from_email"], var_dict["app_password"])
+        # send email
+        s.send_message(msg)
     print("Sent!")
 
 def main():

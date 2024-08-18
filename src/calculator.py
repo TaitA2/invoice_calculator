@@ -7,7 +7,7 @@ def calculate():
     # date
     date = input("Enter date of gig (DD/MM/YY)... ")
     day, month, year = date.split("/")
-    formatted_date = f" {day} {months[month]} 20{year}"
+    formatted_date = f"{day} {months[month]} 20{year}"
 
     # invoice prefix
     invoice_number = f"{year}{month}{(input('Enter invoice suffix... '))}"
