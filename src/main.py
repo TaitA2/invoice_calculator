@@ -1,5 +1,6 @@
 from calculator import calculate
-from generator import generate_invoice, send_email
+from generator import generate_invoice
+from send_invoice import send_email
 
 # main function
 def main():
@@ -10,15 +11,16 @@ def main():
     var_dict["address"] = "My House,\nExample Street"
     var_dict["sender"] = "My Name"
     var_dict["sender_email"] = "my@gmail.com"
+    var_dict["app_password"] = "APP PASSWORD"
     var_dict["recipient"] = "Mr. Recipient"
-    var_dict["recipient_email"] = "recipient@example.com"
+    var_dict["recipient_email"] = "recipient@gmail.com"
     var_dict["iban"] = "IBAN NUMBER"
 
     # create new invoice
     generate_invoice(var_dict)
 
     # send invoice
-    # send_email(var_dict)
+    send_email(var_dict)
 
 # run program
 if __name__ == "__main__":
