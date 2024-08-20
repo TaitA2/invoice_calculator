@@ -1,1 +1,0 @@
-* Make invoice template more universal
