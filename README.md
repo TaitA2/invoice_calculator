@@ -1,4 +1,4 @@
-# Adam's Invoice Generator
+# Invoice Generator
 
 An CLI based program for generating invoices. Created to solve my own real world problem of creating and sending invoices.
 
