@@ -7,9 +7,9 @@ An CLI based program for generating invoices. Created to solve my own real world
     - I recommend setting the recipient email to your own for the first time you run the program to confirm the invoice gets delivered correctly
 * Run main.py from the root of the program
 * Answer all the CLI prompts as needed for your invoice
-    - Invoice number is created in the format of YYMMXXX where Y is the year, x is the month, and X is the invoice suffix 
-    - e.g the first invoice of September 2024 would be 2408001 
-* Once the program is finished running, check your sent box in your email to confirm your invoice was sent
+    - Invoice number is created in the format of YYMMXXX where Y is the year, M is the month, and X is the invoice suffix 
+    - e.g the first invoice of September 2024 would be 2409001 
+* Once the program is finished running, check the 'sent' section of your email to confirm the invoice was sent
 
 ## Template
 This program should work with any placeholder template you want to use but there are a few requirements.
