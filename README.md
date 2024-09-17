@@ -1,6 +1,6 @@
 # Invoice Generator
 
-An CLI based program for generating invoices. Created to solve my own real world problem of creating and sending invoices.
+A CLI based program for generating invoices. Created to solve my own real world problem of creating and sending invoices.
 
 ## Usage
 * Edit the variables in main.py to meet your own needs (e.g replace "My Name" with your own name etc.)
